@@ -9,7 +9,7 @@ CREATE TABLE games (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     genre TEXT,
-    release_date DATE,
+    release_date TEXT NOT NULL ,
     is_favorite BOOLEAN,
     ratings VARCHAR(6),
     publisher TEXT
