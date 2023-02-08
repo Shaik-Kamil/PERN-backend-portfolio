@@ -2,6 +2,7 @@
 const cors = require('cors');
 const express = require('express');
 const gameController = require('./controller/gameController');
+const morgan = require('morgan');
 
 // CONFIGURATION
 const app = express();

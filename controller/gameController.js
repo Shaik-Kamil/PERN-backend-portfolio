@@ -1,7 +1,7 @@
 const express = require('express');
 const games = express.Router();
 
-const { checkName } = require('../validation/helper');
+const { checkTitle, checkBoolean } = require('../validation/helper');
 
 const {
   getAllGames,
@@ -15,8 +15,9 @@ const {
 
 games.get('/', async (req, res) => {
   const allGames = await getAllGames();
-  if (allGames[0]) res.status(200).json(allGames);
-  else res.status(500).json({ error: 'Invalid request' });
+  if (allGames[0]) {
+    res.status(200).json(allGames);
+  } else res.status(500).json({ error: 'Invalid request' });
 });
 
 // Show
@@ -24,13 +25,14 @@ games.get('/', async (req, res) => {
 games.get('/:id', async (req, res) => {
   const { id } = req.params;
   const game = await getGame(id);
-  if (!game.message) res.status(200).json(game);
-  else res.status(500).json({ error: 'Not Found' });
+  if (!game.message) {
+    res.status(200).json(game);
+  } else res.status(500).json({ error: 'Not Found' });
 });
 
 // Create
 
-games.post('/', async (req, res) => {
+games.post('/', checkTitle, checkBoolean, async (req, res) => {
   try {
     const game = await createGame(req.body);
     res.status(200).json(game);
@@ -53,7 +55,7 @@ games.delete('/:id', async (req, res) => {
 
 // Update
 
-games.put('/', async (req, res) => {
+games.put('/', checkTitle, checkBoolean, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedGame = await updateGame(id, req.body);
