@@ -12,5 +12,6 @@ CREATE TABLE games (
     release_date TEXT NOT NULL ,
     is_favorite BOOLEAN,
     ratings VARCHAR(6),
-    publisher TEXT
+    publisher TEXT,
+    image TEXT NOT NULL
 )

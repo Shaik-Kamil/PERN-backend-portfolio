@@ -1,7 +1,11 @@
 const express = require('express');
 const games = express.Router();
 
-const { checkTitle, checkBoolean } = require('../validation/helper');
+const {
+  checkTitle,
+  checkBoolean,
+  checkImage,
+} = require('../validation/helper');
 
 const {
   getAllGames,
@@ -32,7 +36,7 @@ games.get('/:id', async (req, res) => {
 
 // Create
 
-games.post('/', checkTitle, checkBoolean, async (req, res) => {
+games.post('/', checkTitle, checkBoolean, checkImage, async (req, res) => {
   try {
     const game = await createGame(req.body);
     res.status(200).json(game);
@@ -55,7 +59,7 @@ games.delete('/:id', async (req, res) => {
 
 // Update
 
-games.put('/', checkTitle, checkBoolean, async (req, res) => {
+games.put('/', checkTitle, checkBoolean, checkImage, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedGame = await updateGame(id, req.body);

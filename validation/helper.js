@@ -14,4 +14,12 @@ const checkBoolean = (req, res, next) => {
     res.status(400).json({ error: 'is_favorite must have a boolean value' });
   }
 };
-module.exports = { checkTitle, checkBoolean };
+
+const checkImage = (req, res, next) => {
+  if (req.body.image.substring(0, 8) === 'https://') {
+    return next();
+  } else {
+    res.status(400).json({ error: 'image must have a https:// ' });
+  }
+};
+module.exports = { checkTitle, checkBoolean, checkImage };
