@@ -11,7 +11,7 @@ const getAllGames = async () => {
 
 const getGame = async (id) => {
   try {
-    const game = await db.get('SELECT * FROM games WHERE id = $1', id);
+    const game = await db.one('SELECT * FROM games WHERE id=$1', id);
     return game;
   } catch (error) {
     return error;

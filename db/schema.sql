@@ -13,5 +13,5 @@ CREATE TABLE games (
     is_favorite BOOLEAN,
     ratings VARCHAR(6),
     publisher TEXT,
-    image TEXT NOT NULL
+    image TEXT DEFAULT 'no image found'
 )

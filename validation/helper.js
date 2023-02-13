@@ -16,10 +16,15 @@ const checkBoolean = (req, res, next) => {
 };
 
 const checkImage = (req, res, next) => {
-  if (req.body.image.substring(0, 8) === 'https://') {
+  const urlStarts = req.body.image.slice(0, 8);
+  if (!req.body.image.length > 0) {
     return next();
-  } else {
+  }
+  if (urlStarts !== 'https://') {
     res.status(400).json({ error: 'image must have a https:// ' });
+  } else {
+    next();
   }
 };
+
 module.exports = { checkTitle, checkBoolean, checkImage };
